@@ -27,6 +27,7 @@ _base16()
       [ -f "$hook" ] && [ -x "$hook" ] && "$hook"
     done
   fi
+	yq m -ix ~/dotfiles/alacritty.yml ~/.config/alacritty/base16-alacritty/colors/base16-"$BASE16_THEME"-256.yml
 }
 FUNC
 for script in "$script_dir"/scripts/base16*.sh; do
