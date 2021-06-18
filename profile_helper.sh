@@ -27,7 +27,18 @@ _base16()
       [ -f "$hook" ] && [ -x "$hook" ] && "$hook"
     done
   fi
-	yq m -ix ~/dotfiles/alacritty.yml ~/.config/alacritty/base16-alacritty/colors/base16-"$BASE16_THEME"-256.yml
+
+	if [ \
+		$(type yq >> /dev/null;echo $?) = 0 \
+		-a -f ~/dotfiles/alacritty.yml \
+		-a -d ~/.config/alacritty/base16-alacritty \
+		]; then
+			yq m -ix ~/dotfiles/alacritty.yml ~/.config/alacritty/base16-alacritty/colors/base16-"$BASE16_THEME"-256.yml
+			[ ! $? = 0 ] && echo Error merging colorscheme to alacritty config. 
+		else
+			echo cannot apply colorscheme to alacritty. Missing files.
+	fi
+
 }
 FUNC
 for script in "$script_dir"/scripts/base16*.sh; do
