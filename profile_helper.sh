@@ -29,11 +29,10 @@ _base16()
   fi
 
 	if [ \
-		$(type yq >> /dev/null;echo $?) = 0 \
-		-a -f ~/dotfiles/alacritty.yml \
+		-f ~/dotfiles/alacritty.yml \
 		-a -d ~/.config/alacritty/base16-alacritty \
 		]; then
-			yq m -ix ~/dotfiles/alacritty.yml ~/.config/alacritty/base16-alacritty/colors/base16-"$BASE16_THEME"-256.yml
+			cp ~/.config/alacritty/base16-alacritty/colors/base16-"$BASE16_THEME"-256.yml ~/.config/alacritty/colorscheme.yml
 			[ ! $? = 0 ] && echo Error merging colorscheme to alacritty config. 
 		else
 			echo cannot apply colorscheme to alacritty. Missing files.
